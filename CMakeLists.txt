@@ -20,15 +20,15 @@ endif()
 file(GLOB glcpp-library_sources src/glsl/glcpp/*.c src/util/*.c)
 #file(GLOB glcpp-library_sources_remove src/glsl/glcpp/glcpp.c)
 #list(REMOVE_ITEM glcpp-library_sources ${glcpp-library_sources_remove})
-add_library(glcpp-library ${glcpp-library_sources})
+add_library(glcpp-library STATIC ${glcpp-library_sources})
 
 file(GLOB mesa_sources src/mesa/program/*.c src/mesa/main/*.c)
-add_library(mesa ${mesa_sources})
+add_library(mesa STATIC ${mesa_sources})
 
 file(GLOB glsl_sources src/glsl/*.cpp src/glsl/*.c)
 file(GLOB glsl_sources_remove src/glsl/main.cpp src/glsl/builtin_stubs.cpp)
 list(REMOVE_ITEM glsl_sources ${glsl_sources_remove})
-add_library(glsl_optimizer ${glsl_sources})
+add_library(glsl_optimizer STATIC  ${glsl_sources})
 target_link_libraries(glsl_optimizer glcpp-library mesa)
 
 add_executable(glsl_compiler src/glsl/main.cpp)
